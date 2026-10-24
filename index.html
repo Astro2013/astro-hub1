@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17112f">
+  <meta name="description" content="Astro Galaxy — a cute little universe for browser games.">
+  <title>Astro Galaxy ✦ Game Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars stars-a" aria-hidden="true"></div>
+  <div class="stars stars-b" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Astro Galaxy home">
+      <span class="brand-mark">✦</span><span>astro<span class="brand-soft">galaxy</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#games">Explore</a>
+      <a href="#player">Game player</a>
+      <a href="#about">About Astro</a>
+    </nav>
+    <button class="tiny-button" id="starButton" type="button" aria-label="Toggle star mode">✧ <span>Star mode</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse-dot"></span> YOUR LITTLE CORNER OF THE COSMOS</div>
+        <h1>Play among<br><span>the stars.</span></h1>
+        <p class="hero-description">A cozy galaxy for browser games, tiny adventures, and Pokémon adventures Astro discovers next.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#games">Explore games <span>↗</span></a>
+          <a class="secondary-button" href="#player">Open player</a>
+        </div>
+        <div class="hero-note"><span>✦</span> No downloads for games that run in your browser.</div>
+      </div>
+      <div class="mascot-scene astro-art-scene" aria-label="Astro, the illustrated space mascot, floating with a glowing yellow star">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="planet planet-small"></div><div class="planet planet-ring"></div>
+        <div class="astro-art-wrap">
+          <img class="astro-art" src="assets/astro-mascot.png" alt="Astro, with lavender and pink hair, starry cape, and a dark space outfit">
+          <span class="held-star" aria-label="Glowing yellow star">★</span>
+        </div>
+        <div class="float-star float-b">✧</div><div class="float-star float-c">·</div>
+        <div class="mascot-caption">hi, i'm astro <span>♡</span></div>
+      </div>
+    </section>
+
+    <section class="status-strip" aria-label="Site features">
+      <div><span class="status-icon">◉</span><span><strong>Browser-first</strong><small>Play here when the game host allows it</small></span></div>
+      <div><span class="status-icon">✧</span><span><strong>Made for discovery</strong><small>Pokémon games, one cozy hub</small></span></div>
+      <div><span class="status-icon">☾</span><span><strong>Space to chill</strong><small>A little less noise, more stars</small></span></div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE GALAXY ARCADE</div><h2>Pick your next <span>adventure.</span></h2></div>
+        <label class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search games..." aria-label="Search games"></label>
+      </div>
+      <div class="filter-row" role="group" aria-label="Filter games">
+        <button class="filter-chip active" data-filter="all" type="button">All games</button>
+        <button class="filter-chip" data-filter="pokemon" type="button">Pokémon</button>
+      </div>
+      <div class="game-grid" id="gameGrid">
+        <article class="game-card" data-category="pokemon" data-search="pokemon pokémon classic game zone retro games game series">
+          <div class="game-art art-cloud"><span class="cloud-planet">✦</span><span class="cloud-line">POKÉMON</span><span class="art-spark cloud-spark">★</span><span class="art-label">EXTERNAL GAME COLLECTION</span></div>
+          <div class="game-info"><div><h3>Pokémon Games</h3><p>Browse the Pokémon game collection from ClassicGameZone.</p></div><span class="game-tag tag-cyan">COLLECTION</span></div>
+          <button class="card-play" type="button" data-play="pokemon-collection">Load a Game File <span>→</span></button>
+        </article>
+      </div>
+      <p class="empty-state" id="emptyState" hidden>No games found in this little galaxy. Try another search.</p>
+    </section>
+
+    <section class="player-section" id="player">
+      <div class="player-heading">
+        <div><div class="eyebrow">MISSION CONTROL</div><h2>Astro's <span>game window.</span></h2><p>Load an individual game HTML file here when its host permits fetching it. The collection page itself is not a game file.</p></div>
+        <div class="live-pill"><span></span> PLAYER READY</div>
+      </div>
+      <div class="player-shell">
+        <div class="player-topline"><div class="window-dots"><i></i><i></i><i></i></div><span id="playerTitle">WELCOME ABOARD, SPACE TRAVELER</span><button id="resetPlayer" type="button" title="Return to player home">↺</button></div>
+        <div class="player-content" id="playerContent">
+          <div class="player-welcome">
+            <div class="welcome-icon">✦</div>
+            <h3>Your next adventure awaits.</h3>
+            <p>Enter a direct URL to an individual game HTML file below to fetch and load it here.</p>
+            <button class="primary-button" id="openPokemonCollection" type="button">Enter Game File URL <span>→</span></button>
+          </div>
+        </div>
+      </div>
+      <details class="embed-settings">
+        <summary><span>⚙</span> Load an individual game HTML file</summary>
+        <div class="settings-body">
+          <p>Paste the direct HTTPS URL of an individual game HTML file (not the Pokémon collection page). Astro will fetch the HTML and load it in a sandboxed game window. The host must allow cross-origin fetching (CORS). This does not bypass site restrictions or discover hidden file URLs.</p>
+          <label for="embedUrl">Direct game HTML file URL</label>
+          <div class="url-entry"><input id="embedUrl" type="url" placeholder="https://host.example/games/game/index.html" autocomplete="url"><button class="primary-button" id="loadEmbed" type="button">Fetch &amp; load file</button></div>
+          <p class="settings-note">Use only game files you are allowed to access. Relative assets work when the HTML file is hosted with its original folder structure and the host allows access.</p>
+          <div class="embed-message" id="embedMessage" role="status" aria-live="polite"></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="about-card">
+        <div class="about-symbol">✦</div>
+        <div><div class="eyebrow">A NOTE FROM ASTRO</div><h2>Small hub. <span>Big universe.</span></h2><p>Astro Galaxy is a lightweight game hub. External game HTML files can load inside the hub only when their host permits cross-origin fetching. Astro does not bypass restrictions or rehost game files.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">✦</span><span>astro<span class="brand-soft">galaxy</span></span></a><span>made of stardust & a little bit of code</span><span>© <span id="year"></span> Astro Galaxy</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
